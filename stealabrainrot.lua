@@ -203,7 +203,7 @@ Tabs.Game:AddButton({
 
 		print("Started server hop")
 
-		queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/sys32win/artemishub/refs/heads/main/stealabrainrot.lua'))")
+		queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/sys32win/artemishub/refs/heads/main/stealabrainrot.lua'))()")
 
 		local url = ("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Asc&limit=100&excludeFullGames=true"):format(PlaceId)
 		local response = game:HttpGet(url)
