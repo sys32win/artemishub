@@ -15,7 +15,7 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = {
-    Game = Window:AddTab({ Title = "Game", Icon = "gamepad-2" }),
+    Game = Window:AddTab({ Title = "Exploits", Icon = "gamepad-2" }),
 	Player = Window:AddTab({ Title = "Player", Icon = "person-standing" }),
 	Visual = Window:AddTab({ Title = "Visual", Icon = "eye" }),
     -- Settings = Window:AddTab({ Title = "Settings", Icon = "settings" }),
@@ -185,6 +185,42 @@ Tabs.Game:AddButton({
 			end
 			wait()
 			_G.fly = false
+		end
+	end
+})
+
+Tabs.Game:AddButton({
+	Title = "Anti-Hit (10s)",
+	Description = "Needs Web Slinger",
+	Callback = function()
+		local ReplicatedStorage = game:GetService("ReplicatedStorage")
+		local Net = ReplicatedStorage:WaitForChild("Packages"):WaitForChild("Net")
+		local UseItemEvent = Net:WaitForChild("RE/UseItem")
+
+		local plr = game.Players.LocalPlayer
+		local hrp = plr.Character.HumanoidRootPart
+		local hum = plr.Character.Humanoid
+
+		for _,item in pairs(plr.Character:GetChildren()) do
+			if item:IsA("Tool") then
+				item.Parent = plr.Backpack
+			end
+		end
+
+		if not plr.Backpack:FindFirstChild("Web Slinger") then  
+			Fluent:Notify({
+				Title = "Anti-Hit (10s)",
+				Content = "Needs Web Slinger",
+				Duration = 5
+			})
+			return
+		end
+
+		plr.Backpack["Web Slinger"].Parent = plr.Character
+		UseItemEvent:FireServer(hrp.Position, hrp)
+		for i = 1, 10 do
+			hum.PlatformStand = false
+			wait()
 		end
 	end
 })
