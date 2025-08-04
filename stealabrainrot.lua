@@ -198,8 +198,8 @@ Tabs.Game:AddButton({
 		local UseItemEvent = Net:WaitForChild("RE/UseItem")
 
 		local plr = game.Players.LocalPlayer
-		local hrp = plr.Character.HumanoidRootPart
-		local hum = plr.Character.Humanoid
+		local hrp = hrp()
+		local hum = hum()
 
 		for _,item in pairs(plr.Character:GetChildren()) do
 			if item:IsA("Tool") then
@@ -218,7 +218,8 @@ Tabs.Game:AddButton({
 
 		plr.Backpack["Web Slinger"].Parent = plr.Character
 		UseItemEvent:FireServer(hrp.Position, hrp)
-		for i = 1, 10 do
+		for i = 1, 100 do
+			print(i)
 			hum.PlatformStand = false
 			wait()
 		end
